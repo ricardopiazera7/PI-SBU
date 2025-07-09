@@ -79,7 +79,17 @@ def cadastrar_usuario():
             novo_usuario["especialidade"] = especialidade
         else:
             novo_usuario["eh_medico"] = False
-            
+
+    # Pergunta sobre convênio (para todos os tipos de usuários)
+    tem_convenio = input("O usuário possui convênio? (s/n): ").strip().lower()
+    if tem_convenio == "s":
+        convenio = input("Informe o nome do convênio: ").strip()
+        if not convenio:
+            print("Erro: o nome do convênio não pode ser vazio.")
+            return
+        novo_usuario["convenio"] = convenio
+    else:
+        novo_usuario["convenio"] = None
     usuarios.append(novo_usuario)
     salvar_usuarios(usuarios)
     print("Usuário cadastrado com sucesso!")
